@@ -57,19 +57,19 @@ def least_recently_used(frame_count, pages):
 
     while pages:
         page = pages.pop(0)
+        if page in used: used.remove(page)
+        used.append(page)
 
         if page in frames:
             continue
         else:
             faults += 1
             if(all([f is not None for f in frames])):
-                # VER PROBLEMA DE QUE NÂO TO APAGANDO DA USED E ELE PODE TER 2 VEZ O MSM NUMERO
                 lengths = {x: used.index(x) for x in frames}
-                index = used.index(min(lengths, key=lengths.get))
+                index = frames.index(min(lengths, key=lengths.get))
             else:
                 index = frames.index(None)
-
-            used.append(page)
+                
             frames[index] = page
 
     return faults
