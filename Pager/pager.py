@@ -20,9 +20,11 @@ def first_in_first_out(frame_count, pages):
             continue
         else:
             faults += 1
-            index = (index+1) % frame_count \
-                    if all([f is not None for f in frames]) \
-                    else frames.index(None)
+            if None in frames:
+                index = frames.index(None)
+            else:
+                index = (index+1) % frame_count
+
             frames[index] = page
 
     return faults
@@ -39,12 +41,12 @@ def optimal_page_replacement(frame_count, pages):
             continue
         else:
             faults += 1
-            if(all([f is not None for f in frames])):
+            if None in frames:
+                index = frames.index(None)
+            else:
                 lengths = {x: pages.index(x) if x in pages else infinity for x in frames}
                 index = frames.index(max(lengths, key=lengths.get))
-            else:
-                index = frames.index(None)
-            
+                
             frames[index] = page
 
     return faults
@@ -57,18 +59,17 @@ def least_recently_used(frame_count, pages):
 
     while pages:
         page = pages.pop(0)
-        if page in used: used.remove(page)
-        used.append(page)
+        used = [u for u in used if u is not page] + [page]
 
         if page in frames:
             continue
         else:
             faults += 1
-            if(all([f is not None for f in frames])):
+            if None in frames:
+                index = frames.index(None)
+            else:
                 lengths = {x: used.index(x) for x in frames}
                 index = frames.index(min(lengths, key=lengths.get))
-            else:
-                index = frames.index(None)
                 
             frames[index] = page
 

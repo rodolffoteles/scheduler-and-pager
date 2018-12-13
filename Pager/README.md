@@ -1,5 +1,5 @@
 # Pager
-In a operating systems that use paging for memory management, page replacement algorithm are needed to decide which page needs to be replaced when new page comes in. Whenever a new page is referred and not present in memory, page fault occurs and the operating system replaces one of the existing pages with newly needed page. Here you have to calculate the number of page faults with three different algorithms (first in first out, optimal page replacement, least recently used). 
+In a operating systems that use paging for memory management, page replacement algorithm are needed to decide which page needs to be replaced when new page comes in. Whenever a new page is referred and not present in memory, page fault occurs and the operating system replaces one of the existing pages with newly needed page. Write a program that calculates the number of page faults with three different algorithms (first in first out, optimal page replacement, least recently used) given the number of frame slots and the order of page accesses. 
 
 ## Input
 The first line of input contains one integer indicating the number of frame slots. The next lines consists of several integers numbers, one per line, corresponding to the number of the page referenced by the process.
